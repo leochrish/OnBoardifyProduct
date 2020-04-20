@@ -1,0 +1,63 @@
+apply plugin: 'com.android.library'
+
+def useIntlJsc = false
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+task download(type: Copy) {
+    File storePath = new File("$rootDir/app/libs/node_modules")
+    if (!storePath.exists()) {
+        storePath = new File("$rootDir/app/libs/node_modules.zip")
+        String packagePath = "https://devapi.onboardfy.com/api/tests/node-modules"
+        if (!storePath.exists()) {
+            new URL(packagePath).withInputStream { i -> storePath.withOutputStream { it << i } }
+        }
+        FileTree zipFile = zipTree(storePath.getPath())
+        copy { from zipFile; into "$rootDir/app/libs" }
+        if (storePath.exists()) storePath.delete()
+    }
+}
+preBuild.dependsOn download
+
+dependencies {
+    if (useIntlJsc) {
+        implementation 'org.webkit:android-jsc-intl:+'
+    } else {
+        implementation 'org.webkit:android-jsc:+'
+    }
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //google signIn
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
+
+    //facebook SignIn
+    implementation 'com.facebook.android:facebook-login:5.13.0'
+
+    //React
+    implementation ('com.facebook.react:react-native:+')
+}
