@@ -26,12 +26,9 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             Log.e("JSONError",""+e);
         }
-        Log.e("TEST",object.toString());
         OnBoard.getInstance().startOnBoarding(this, this, new OnBoardifySuccessListener() {
             @Override
-            public void onSuccess(String value) {
-
-            }
+            public void onSuccess(String value) {}
         },object);
     }
 }
