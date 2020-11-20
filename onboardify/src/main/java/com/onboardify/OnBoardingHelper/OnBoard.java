@@ -22,26 +22,16 @@ public class OnBoard implements BundleDownloadedListener {
         return new OnBoard();
     }
 
-    public void startOnBoarding(Context context, Activity activity, OnBoardifySuccessListener listener) {
+    public void startOnBoarding(Context context, Activity activity, OnBoardifySuccessListener listener, JSONObject object) {
         this.context = context;
         this.activity =activity;
         OnBoard.listener = listener;
         BUNDLE_FILE_DIR = context.getApplicationInfo().dataDir+"/.bundle";
-        JSONObject object = new JSONObject();
-        try {
-            object.put("platform",0);
-            object.put("projectName",this.context.getString(context.getResources().getIdentifier("app_name","string",this.context.getApplicationInfo().packageName)));
-            object.put("packageName",this.context.getApplicationInfo().packageName);
-            object.put("secretKey",this.context.getString(context.getResources().getIdentifier("secret_key","string",this.context.getApplicationInfo().packageName)));
-        } catch (JSONException e) {
-            Log.e("JSONError",""+e);
-        }
-        Log.e("TEST",object.toString());
         dialog = new ProgressDialog(context);
         dialog.setMessage("Updating Bundle");
         dialog.setCancelable(false);
-        /*dialog.show();
-        BundleDownloader.getInstance(this.context).init(object,this);*/
+        dialog.show();
+        BundleDownloader.getInstance(this.context).init(object,this);
         Intent onBoardIntent = new Intent(context, OnBoardingActivity.class);
         activity.startActivity(onBoardIntent);
     }
@@ -56,7 +46,7 @@ public class OnBoard implements BundleDownloadedListener {
             Log.e("OnBoarding",status);
             Intent onBoardIntent = new Intent(context, OnBoardingActivity.class);
             activity.startActivity(onBoardIntent);
-        }else {
+        } else {
             Log.e("OnBoarding",status);
         }
         dialog.cancel();
