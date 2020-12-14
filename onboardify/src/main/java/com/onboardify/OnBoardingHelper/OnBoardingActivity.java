@@ -4,17 +4,13 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Window;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -73,13 +69,13 @@ public class OnBoardingActivity extends AppCompatActivity implements DefaultHard
         mReactInstanceManager = ReactInstanceManager.builder()
                 .setApplication(getApplication())
                 .setCurrentActivity(this)
-                .setBundleAssetName("index.android.bundle")
-                //.setJSBundleFile(OnBoard.BUNDLE_FILE_DIR + OnBoard.BUNDLE_NAME)
+                //.setBundleAssetName("index.android_1.bundle")
+                .setJSBundleFile(OnBoard.BUNDLE_FILE_DIR + OnBoard.BUNDLE_NAME)
                 .addPackage(new MainReactPackage())
                 .addPackage(new CommunicationPackages())
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
-        mReactRootView.startReactApplication(mReactInstanceManager, "on_boardify_core", null);
+        mReactRootView.startReactApplication(mReactInstanceManager, "sampleOb", null);
     }
 
     @Override

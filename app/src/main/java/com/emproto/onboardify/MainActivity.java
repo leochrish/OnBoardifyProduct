@@ -1,4 +1,4 @@
-package com.emproto.onboardify;
+    package com.emproto.onboardify;
 
 import androidx.appcompat.app.AppCompatActivity;
 

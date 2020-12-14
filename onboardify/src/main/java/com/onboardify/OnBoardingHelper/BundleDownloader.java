@@ -25,7 +25,7 @@ import static android.content.Context.CONNECTIVITY_SERVICE;
 class BundleDownloader {
 
     private URL url;
-    private HttpsURLConnection connection;
+    private HttpURLConnection connection;
     private Context context;
     private OutputStream outputStream;
     private File bundleFile;
@@ -41,7 +41,7 @@ class BundleDownloader {
             this.context = context;
             url = new URL(OnBoard.BUNDLE_URL);
 
-            connection = (HttpsURLConnection) url.openConnection();
+            connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setConnectTimeout(10000);
             connection.setRequestProperty("Content-Type","application/json");

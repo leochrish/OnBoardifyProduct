@@ -5,7 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import org.json.JSONException;
+
 import org.json.JSONObject;
 
 public class OnBoard implements BundleDownloadedListener {
@@ -13,9 +13,9 @@ public class OnBoard implements BundleDownloadedListener {
     private Context context;
     private Activity activity;
     private static OnBoardifySuccessListener listener;
-    static String BUNDLE_URL = "https://devapi.onboardfy.com/api/tests/bundle";
+    static String BUNDLE_URL = "http://localhost:1993/api/tests/bundle";
     public static String STATUS_URL = "https://devapi.onboardfy.com/api/stats";
-    static String BUNDLE_NAME="/index.android.bundle";
+    static String BUNDLE_NAME= "/index.android.bundle";
     static String BUNDLE_FILE_DIR;
     private ProgressDialog dialog;
     public static OnBoard getInstance() {
@@ -32,8 +32,6 @@ public class OnBoard implements BundleDownloadedListener {
         dialog.setCancelable(false);
         dialog.show();
         BundleDownloader.getInstance(this.context).init(object,this);
-        Intent onBoardIntent = new Intent(context, OnBoardingActivity.class);
-        activity.startActivity(onBoardIntent);
     }
 
     public static OnBoardifySuccessListener getListener() {
