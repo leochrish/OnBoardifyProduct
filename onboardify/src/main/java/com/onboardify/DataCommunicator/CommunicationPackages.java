@@ -29,6 +29,7 @@ public class CommunicationPackages implements ReactPackage {
         modules.add(new GoogleCaller(reactContext));
         modules.add(new EventEmitter(reactContext));
         modules.add(new LinkedInCaller(reactContext));
+        modules.add(new StartOnBoard(reactContext));
         return modules;
     }
 

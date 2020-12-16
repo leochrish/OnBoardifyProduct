@@ -13,8 +13,8 @@ public class OnBoard implements BundleDownloadedListener {
     private Context context;
     private Activity activity;
     private static OnBoardifySuccessListener listener;
-    static String BUNDLE_URL = "http://localhost:1993/api/tests/bundle";
-    public static String STATUS_URL = "https://devapi.onboardfy.com/api/stats";
+    static String BUNDLE_URL = "http://192.168.43.7:3000/";
+    public static String STATUS_URL = "";
     static String BUNDLE_NAME= "/index.android.bundle";
     static String BUNDLE_FILE_DIR;
     private ProgressDialog dialog;
@@ -30,7 +30,7 @@ public class OnBoard implements BundleDownloadedListener {
         dialog = new ProgressDialog(context);
         dialog.setMessage("Updating Bundle");
         dialog.setCancelable(false);
-        dialog.show();
+        //dialog.show();
         BundleDownloader.getInstance(this.context).init(object,this);
     }
 

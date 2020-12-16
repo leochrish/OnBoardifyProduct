@@ -69,13 +69,13 @@ public class OnBoardingActivity extends AppCompatActivity implements DefaultHard
         mReactInstanceManager = ReactInstanceManager.builder()
                 .setApplication(getApplication())
                 .setCurrentActivity(this)
-                //.setBundleAssetName("index.android_1.bundle")
+                //.setBundleAssetName("index.android.bundle")
                 .setJSBundleFile(OnBoard.BUNDLE_FILE_DIR + OnBoard.BUNDLE_NAME)
                 .addPackage(new MainReactPackage())
                 .addPackage(new CommunicationPackages())
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
-        mReactRootView.startReactApplication(mReactInstanceManager, "sampleOb", null);
+        mReactRootView.startReactApplication(mReactInstanceManager, "test"/*sampleOb*/, null);
     }
 
     @Override
